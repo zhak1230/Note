@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head> </head>
+  <body>
+    <span>Total clicks: 0</span>
+    <button id="btn">Click me</button>
+  </body>
+  <script>
+    let counter = 0;
+    const span = document.querySelector("span");
+    const button = document.getElementById("btn");
+    function handleClick() {
+      counter = counter + 1;
+      span.innerText = `Total clicks: ${counter}`;
+      console.log(counter);
+    }
+
+    button.addEventListener("click", handleClick);
+
+  </script>
+</html>
+
+<!-- 순서 
+1. html 작성
+2. js에서 가져오기 
+3. event 감지 
+4. 데이터 업데이트
+5. html 업데이트 
+-->
