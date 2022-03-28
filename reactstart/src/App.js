@@ -4,59 +4,56 @@ import { useState, useEffect } from 'react';
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const [coins, setCoins] = useState([]);
-  const [cost, setCost] = useState(1);
-  const [need, setNeed] = useState(1);
-  const onChange = (event) => {
-    setCost(event.target.value);
-    setNeed(1);
-  };
-  const handleInput = (event) => {
-    setNeed(event.target.value);
+  const [movies, setMovies] = useState([]);
+  const getMovies = async () => {
+    const json = await (
+      await fetch(
+        'https://yts.mx/api/v2/list_movies.json?minimum_rating=10&sort_by=year'
+      )
+    ).json();
+    setMovies(json.data.movies);
+    setLoading(false);
   };
   useEffect(() => {
-    fetch('https://api.coinpaprika.com/v1/tickers')
-      .then((response) => response.json())
-      .then((json) => {
-        setCoins(json);
-        setLoading(false);
-      });
+    getMovies();
   }, []);
+  console.log(movies);
   return (
     <div>
-      <h1>The coins!{loading ? '' : `Here are..${coins.length} coins`}</h1>
       {loading ? (
-        <strong>loading...</strong>
+        <h1>Loading...</h1>
       ) : (
-        <select onChange={onChange}>
-          <option>Select Coin!</option>
-          {coins.map((coin, index) => (
-            <option
-              key={index}
-              value={coin.quotes.USD.price}
-              id={coin.symbol}
-              symbol={coin.symbol}
-            >
-              {coin.name}({coin.symbol}) : ${coin.quotes.USD.price} USD
-            </option>
+        <div>
+          {movies.map((movie) => (
+            <div key={movie.id}>
+              <img src={movie.medium_cover_image} />
+              <h2>{movie.title}</h2>
+              <p>{movie.summary}</p>
+              state: {movie.state}
+              {movie.hasOwnProperty('genres') ? (
+                <ul>
+                  {movie.genres.map((g) => (
+                    <li key={g}>{g}</li>
+                  ))}
+                </ul>
+              ) : null}
+            </div>
           ))}
-        </select>
+        </div>
       )}
-      <h2>Please enter the amount</h2>
-      <div>
-        <input
-          type='number'
-          value={need}
-          onChange={handleInput}
-          placeholder='dollor'
-        />
-        $
-      </div>
-      <h2>You can get {need / cost}</h2>
     </div>
   );
 }
 export default App;
 
-// https://github.com/SALT0601/ReactJS-Web/commit/ebce52caaf223783d9c230426f062e7b92bc182f
-// https://github.com/rootTiket/pracice/blob/main/src/App.js
+// fetch, json을 진행 후 로딩을 끝냈기 때문에 반드시 setLoading(false)를 해줘야함
+// then대신에 async-await를 보편적으로 사용함
+// await을 감싸는 await을 만들 수 있음
+// movies.map((movie
+// ->map의 argument는 x, m, g 등등 마음대로 해도됨
+// 여기선 movie라고 정함
+// div key={movie.id} h2{movie.title}/h2
+// -> 이 컴포넌트들은 movie 배열에 있는 각 movie에서 변형되어 나온 것
+
+// key={g} -> 따로 정해진 key가 없기 때문에 g를 가져와 key로 써줌
+// 단, g가 고유한 값일 경우에만 가능
