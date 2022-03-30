@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.js": "/Note/static/js/main.ab240e4c.js",
-    "index.html": "/Note/index.html",
-    "main.ab240e4c.js.map": "/Note/static/js/main.ab240e4c.js.map"
+    "main.js": "/Movie/static/js/main.ab240e4c.js",
+    "index.html": "/Movie/index.html",
+    "main.ab240e4c.js.map": "/Movie/static/js/main.ab240e4c.js.map"
   },
   "entrypoints": [
     "static/js/main.ab240e4c.js"
