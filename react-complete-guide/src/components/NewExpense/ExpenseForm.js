@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ExpenseBtn from './ExpenseBtn';
+
 import './ExpenseForm.css';
 
 const ExpenseForm = (props) => {
@@ -65,15 +65,12 @@ const ExpenseForm = (props) => {
         </div>
       </div>
       <div className='new-expense__actions'>
-        <ExpenseBtn />
         <button type='submit'>Add Expense</button>
       </div>
     </form>
   );
 };
-{
-  /* <button type='submit'>Add Expense</button> */
-}
+
 export default ExpenseForm;
 
 // useState 3가지를 한번에 묶어 사용하는 법

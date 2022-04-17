@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ExpenseForm from './ExpenseForm';
 import './NewExpense.css';
 
@@ -11,9 +11,18 @@ const NewExpense = (props) => {
     props.onAddExpense(expenseData);
   };
 
+  const [visible, setVisible] = useState(false);
+
   return (
     <div className='new-expense'>
-      <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} />
+      <button
+        onClick={() => {
+          setVisible(!visible);
+        }}
+      >
+        {visible ? 'Cancel' : 'Add New Expense'}
+      </button>
+      {visible && <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} />}
     </div>
   );
 };
