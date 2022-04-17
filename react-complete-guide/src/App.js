@@ -34,13 +34,8 @@ const App = () => {
   };
 
   const addFilterHandeler = (filter) => {
-    console.log('In App.js');
     console.log(filter);
   };
-
-  // const filter = ['2019', '2020', '2021', '2022'];
-  // const result = {filter.filter((year) => year.charAt(year.length - 1) === '2')}
-  // console.log(result);
 
   return (
     <div>
