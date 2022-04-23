@@ -24,3 +24,5 @@ function App() {
 }
 
 export default App;
+
+// React.Frgment 대신 빈칸으로 사용해도 상관없음.
